@@ -1,8 +1,3 @@
-import sys
-
-#  CONSTANTS
-# -----------
-
 CODON_TABLE = {
     "UUU": "F", "CUU": "L", "AUU": "I", "GUU": "V",
     "UUC": "F", "CUC": "L", "AUC": "I", "GUC": "V",
@@ -51,30 +46,3 @@ MONOISOTOPIC_MASS_TABLE = {
     "W": 186.07931,
     "Y": 163.06333
 }
-
-#  FUNCTIONS
-# -----------
-
-def get_filepath(program_name):
-    if len(sys.argv) < 2:
-        raise SystemExit(f"Usage: {program_name}.py <filepath>")
-    return sys.argv[1]
-
-# returns a dict of {id: sequence}
-def parse_fasta(filepath):
-    fasta_dict = {}
-    with open(filepath, "r") as f:
-        id = ""
-        sequence_parts = []
-        for line in f:
-            line = line.strip()
-            if line.startswith(">"):
-                if id != "":
-                    fasta_dict[id] = "".join(sequence_parts)
-                id = line[1::]
-                sequence_parts = []
-            else:
-                sequence_parts.append(line)
-        if id != "":
-            fasta_dict[id] = "".join(sequence_parts)
-    return fasta_dict

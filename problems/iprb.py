@@ -1,13 +1,13 @@
 # Mendel's First Law
 # Problem link: https://rosalind.info/problems/iprb/
 
-import utils
 import pyperclip
 from math import comb
+from utils.io import get_filepath
 
-filepath = utils.get_filepath("iprb")
+filepath = get_filepath()
 
-def iprb(k, m, n):
+def solve(k, m, n):
     total = k + m + n
     return (
         comb(k, 2) +
@@ -17,12 +17,11 @@ def iprb(k, m, n):
         m * n * 0.5
     ) / comb(total, 2)
 
-with open(filepath, "r") as f:
-    content = f.read().strip()
+if __name__ == "__main__":
+    data = filepath.read_text().strip()
+    k, m, n = map(int, data.split(" "))
 
-k, m, n = map(int, content.split(" "))
+    result = solve(k, m, n)
 
-result = iprb(k, m, n)
-
-pyperclip.copy(result)
-print(result)
+    pyperclip.copy(result)
+    print(result)

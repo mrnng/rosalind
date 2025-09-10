@@ -1,13 +1,12 @@
 # Consensus and Profile
 # Problem link: https://rosalind.info/problems/cons/
 
-import utils
 import pyperclip
+from utils.io import get_filepath, parse_fasta
 
-filepath = utils.get_filepath("cons")
-fasta_dict = utils.parse_fasta(filepath)
+filepath = get_filepath()
 
-def consensus_and_profile(fasta_dict):
+def solve(fasta_dict):
     sequences = list(fasta_dict.values())
     n = len(sequences[0])
     consensus = {k: [0 for _ in range(n)] for k in "ACGT"}
@@ -30,7 +29,11 @@ def consensus_and_profile(fasta_dict):
     )
     return profile_string + "\n" + consensus_string
 
-result = consensus_and_profile(fasta_dict)
+if __name__ == "__main__":
+    data = filepath.read_text().strip()
+    fasta_dict = parse_fasta(data)
 
-pyperclip.copy(result)
-print(result)
+    result = solve(fasta_dict)
+
+    pyperclip.copy(result)
+    print(result)

@@ -1,26 +1,27 @@
 # Translating RNA into Protein
 # Problem link: https://rosalind.info/problems/prot/
 
-import utils
 import pyperclip
+from utils.io import get_filepath
+from utils.bio import CODON_TABLE
 
-filepath = utils.get_filepath("prot")
+filepath = get_filepath()
 
-def rna_to_protein(sequence):
+def solve(sequence):
     prot_list = []
     for i in range(0, len(sequence), 3):
         sub = sequence[i:i+3]
-        codon = utils.CODON_TABLE[sub]
+        codon = CODON_TABLE[sub]
         if codon == "Stop":
             break
         else:
             prot_list.append(codon)
     return "".join(prot_list)
 
-with open(filepath, "r") as f:
-    sequence = f.read().strip()
+if __name__ == "__main__":
+    sequence = filepath.read_text().strip()
 
-result = rna_to_protein(sequence)
+    result = solve(sequence)
 
-pyperclip.copy(result)
-print(result)
+    pyperclip.copy(result)
+    print(result)
