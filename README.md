@@ -8,11 +8,13 @@ from the [Rosalind Project](rosalind.info/).
 Each problem is implemented in its own file, with a shared utils module
 providing helper functions.
 
+```
 rosalind/
 |--problems/ # individual problem solutions
 |--utils/
 |  |--io.py  # input/output helper functions
 |  |--bio.py # bioinformatics constants
+```
 
 ## Requirements
 
